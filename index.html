@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Практика 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+  :root {
+    --bg: #E1E8F3;
+    --accent: #5E86C2;
+    --ink: #1d2b44;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .practice {
+    width: 100%;
+    padding: 24px clamp(16px, 4vw, 48px) 32px;
+  }
+  .question {
+    background: var(--card);
+    border-left: 6px solid var(--accent);
+    border-radius: 8px;
+    padding: 18px 20px 20px;
+    margin-bottom: 18px;
+  }
+  .task { margin: 0 0 10px; font-size: 18px; }
+  .task:last-child { margin-bottom: 0; }
+  .task.strong { font-weight: 500; }
+  .emp-title { margin: 0 0 14px; font-size: 20px; font-weight: 700; color: var(--accent); }
+  .question label { display: block; font-weight: 500; font-size: 18px; margin-bottom: 6px; }
+  .note { margin: 0 0 10px; font-size: 14px; color: #4d5f7f; }
+  .field + .label-gap { margin-top: 16px; }
+  textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+    font: inherit;
+    color: var(--ink);
+    padding: 12px 14px;
+    border: 2px solid #c9d5e8;
+    border-radius: 6px;
+    background: #f9fbfe;
+    margin-bottom: 16px;
+  }
+  textarea:last-child { margin-bottom: 0; }
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(94,134,194,.3);
+  }
+  .actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .hint { font-size: 14px; color: #2c3e5e; }
+  .hint[hidden] { display: none; }
+  #status { font-size: 14px; min-height: 1.4em; margin-top: 10px; }
+  button {
+    font: inherit;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    background: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background .15s, transform .05s;
+  }
+  button:hover:not(:disabled) { background: #4a72ad; border-color: #4a72ad; }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:focus-visible { outline: 3px solid #1d2b44; outline-offset: 2px; }
+  button:disabled {
+    background: #b9c7de;
+    border-color: #b9c7de;
+    color: #6f7f99;
+    cursor: not-allowed;
+  }
+
+  #pdf-wrap { position: fixed; left: 0; top: 0; width: 0; height: 0; overflow: hidden; pointer-events: none; }
+  #pdf-sheet {
+    width: 700px;
+    padding: 32px;
+    background: #fff;
+    color: #1d2b44;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  #pdf-sheet h2 { margin: 0 0 4px; font-size: 22px; color: #5E86C2; }
+  #pdf-sheet .date { margin: 0 0 20px; font-size: 12px; color: #5b6b85; }
+  #pdf-sheet h3.emp { margin: 22px 0 0; font-size: 17px; color: #5E86C2; }
+  #pdf-sheet h4 { margin: 14px 0 6px; font-size: 15px; }
+  #pdf-sheet p.ans {
+    margin: 0 0 6px;
+    padding: 10px 12px;
+    border-left: 4px solid #5E86C2;
+    background: #eef3fa;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<main class="practice">
+  <section class="question">
+    <p class="task strong">Понаблюдай за двумя сотрудниками в работе. По каждому из них ответь на вопросы:</p>
+  </section>
+
+  <section class="question">
+    <h2 class="emp-title">Сотрудник 1</h2>
+    <label for="e1a">Что сотрудника мотивирует в работе?</label>
+    <textarea id="e1a" placeholder="Напиши свой ответ"></textarea>
+    <label for="e1b">На каких фактах основано твое предположение об актуальном мотиваторе?</label>
+    <p class="note">Конкретные наблюдения: реакции на задачи, темы в неформальном разговоре за обедом, какие рабочие вопросы чаще задает сотрудник.</p>
+    <textarea id="e1b" placeholder="Напиши свой ответ"></textarea>
+  </section>
+
+  <section class="question">
+    <h2 class="emp-title">Сотрудник 2</h2>
+    <label for="e2a">Что сотрудника мотивирует в работе?</label>
+    <textarea id="e2a" placeholder="Напиши свой ответ"></textarea>
+    <label for="e2b">На каких фактах основано твое предположение об актуальном мотиваторе?</label>
+    <p class="note">Конкретные наблюдения: реакции на задачи, темы в неформальном разговоре за обедом, какие рабочие вопросы чаще задает сотрудник.</p>
+    <textarea id="e2b" placeholder="Напиши свой ответ"></textarea>
+  </section>
+
+  <div class="actions">
+    <button id="save" type="button" disabled>Скачать в PDF</button>
+    <span class="hint" id="hint">Заполни все поля, чтобы сохранить результат</span>
+  </div>
+  <div id="status" role="status" aria-live="polite"></div>
+</main>
+
+<div id="pdf-wrap" aria-hidden="true">
+<div id="pdf-sheet">
+  <h2>Карта мотиваторов в команде</h2>
+  <p class="date" id="pdf-date"></p>
+  <div id="pdf-e1">
+    <h3 class="emp">Сотрудник 1</h3>
+    <h4>Что сотрудника мотивирует в работе?</h4>
+    <p class="ans" id="pdf-e1a"></p>
+    <h4>На каких фактах основано твое предположение об актуальном мотиваторе?</h4>
+    <p class="ans" id="pdf-e1b"></p>
+  </div>
+  <div id="pdf-e2">
+    <h3 class="emp">Сотрудник 2</h3>
+    <h4>Что сотрудника мотивирует в работе?</h4>
+    <p class="ans" id="pdf-e2a"></p>
+    <h4>На каких фактах основано твое предположение об актуальном мотиваторе?</h4>
+    <p class="ans" id="pdf-e2b"></p>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+(function () {
+  var MIN = 10;
+  var $ = function (id) { return document.getElementById(id); };
+  var btn = $('save'), status = $('status'), hint = $('hint');
+  var ids = ['e1a', 'e1b', 'e2a', 'e2b'];
+
+  function len(id) { return $(id).value.trim().length; }
+
+  // Сотрудник 1 обязателен. Сотрудник 2 необязателен,
+  // но если начал заполнять — оба поля должны быть заполнены.
+  function isValid() {
+    var first = len('e1a') >= MIN && len('e1b') >= MIN;
+    var secondEmpty = len('e2a') === 0 && len('e2b') === 0;
+    var secondFull = len('e2a') >= MIN && len('e2b') >= MIN;
+    return first && (secondEmpty || secondFull);
+  }
+  function update() {
+    var ok = isValid();
+    btn.disabled = !ok;
+    hint.hidden = ok;
+  }
+  ids.forEach(function (id) { $(id).addEventListener('input', update); });
+
+  btn.addEventListener('click', function () {
+    if (btn.disabled) return;
+    ids.forEach(function (id) { $('pdf-' + id).textContent = $(id).value.trim(); });
+    $('pdf-e2').style.display = (len('e2a') || len('e2b')) ? '' : 'none';
+    $('pdf-date').textContent = new Date().toLocaleDateString('ru-RU');
+    status.textContent = 'Готовлю PDF…';
+    window.scrollTo(0, 0);
+
+    function fallback() {
+      status.textContent = 'Не удалось создать PDF автоматически. В открывшемся окне печати выбери «Сохранить как PDF».';
+      window.print();
+    }
+    if (!window.html2pdf) { fallback(); return; }
+    html2pdf().set({
+      margin: 10,
+      filename: 'praktika-4.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] }
+    }).from($('pdf-sheet')).save().then(function () {
+      status.textContent = 'PDF сохранён.';
+    }).catch(fallback);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
